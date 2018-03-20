@@ -1,0 +1,20 @@
+{
+  "name": "visualising-sleep",
+  "version": "0.0.1",
+  "description": "Project for Data Visualisation course",
+  "main": "src/index.js",
+  "repository": "https://github.com/digi0ps/visualising-sleep.git",
+  "author": "digi0ps <sriru1998@gmail.com>",
+  "license": "MIT",
+  "private": null,
+  "devDependencies": {
+    "serve": "^6.5.3",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.12"
+  },
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "serve": "serve -s build"
+  }
+}

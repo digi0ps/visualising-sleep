@@ -1,49 +1,43 @@
-        body {
-          height: 100vh;
-          background: whitesmoke;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-around;
-          align-items: center;
-        }
-        .bar:hover {
-          opacity: 0.8;
-        }
-
-        svg, div {
-          display: block;
-        }
-
-        .intro {
-          text-align: center;
-          font-family: "Open Sans", sans-serif;
-          font-weight: 300;
-          font-size: 30px;
-          margin-bottom: 10px;
-        }
-
-        .intro-small {
-          font-size: 20px;
-          font-family: "Open Sans", sans-serif;
-          font-weight: 100;
-          width: 70%;
-          margin: 0px auto;
-        }
-
-        a {
-            color: rgba(0,0,0,0.5);
-            border-bottom: 1px dashed rgb(230, 74, 25);
-            transition: 0.2s all ease-in;
-            text-decoration: none;
-        }
-
-        a:hover {
-            color: rgba(230, 74, 25, 0.9);
-            text-decoration: none;
-        }
-
-        .thankyou {
-          font-family: "Open Sans", sans-serif;
-          font-weight: 100;
-          font-size: 20px;
-        }
+body {
+height: 100vh;
+background: whitesmoke;
+display: flex;
+flex-direction: column;
+justify-content: space-around;
+align-items: center;
+}
+.bar:hover {
+opacity: 0.8;
+}
+svg, div {
+display: block;
+}
+.intro {
+text-align: center;
+font-family: "Open Sans", sans-serif;
+font-weight: 300;
+font-size: 30px;
+margin-bottom: 10px;
+}
+.intro-small {
+font-size: 20px;
+font-family: "Open Sans", sans-serif;
+font-weight: 100;
+width: 70%;
+margin: 0px auto;
+}
+a {
+color: rgba(0,0,0,0.5);
+border-bottom: 1px dashed rgb(230, 74, 25);
+transition: 0.2s all ease-in;
+text-decoration: none;
+}
+a:hover {
+color: rgba(230, 74, 25, 0.9);
+text-decoration: none;
+}
+.thankyou {
+font-family: "Open Sans", sans-serif;
+font-weight: 100;
+font-size: 20px;
+}

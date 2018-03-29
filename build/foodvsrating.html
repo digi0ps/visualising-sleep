@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
+<style>
+body {
+  height: 100vh;
+  background: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.bar:hover {
+  opacity: 0.8;
+}
+
+.axis--x path {
+  display: none;
+}
+
+svg, div {
+  display: block;
+}
+
+.intro {
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  font-size: 30px;
+}
+
+.intro-small {
+  font-size: 20px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 100;
+  width: 70%;
+  margin: 0px auto;
+}
+
+a {
+    color: rgba(0,0,0,0.5);
+    border-bottom: 1px dashed rgb(230, 74, 25);
+    transition: 0.2s all ease-in;
+    text-decoration: none;
+}
+
+a:hover {
+    color: rgba(230, 74, 25, 0.9);
+    text-decoration: none;
+}
+
+</style>
+<div class="intro">
+  First we see the effect of food on a feeling good next good.
+  <br>
+  <div class="intro-small">
+    As we can see, the people who eat Healthy food before sleep more hours.
+    Eating healthy = Feeling better next morning.
+  </div>
+</div>
+<svg width="400" height="550"></svg>
+
+<div><a href="datevssleep.html">Now let's see the next one</a></div>
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script>
+
+var svg = d3.select("svg"),
+    margin = {top: 20, right: 20, bottom: 30, left: 40},
+    width = +svg.attr("width") - margin.left - margin.right,
+    height = +svg.attr("height") - margin.top - margin.bottom;
+
+var x = d3.scaleBand().range([0, width]).round(true).padding(0.11),
+    y = d3.scaleLinear().rangeRound([height, 0]);
+
+var g = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+d3.csv("./javascript/sleepdata2.csv", function(error, data) {
+  if (error) throw error;
+
+  window.data = data;
+
+  const foods = d3.map(data, (d) => d.food).keys()
+  const new_data = foods.map((food) => {
+    var average = d3.mean(data, (d) => {
+      if(d.food == food) return d.rating
+    })
+    var average2 = d3.mean(data, (d) => {
+      if(d.food == food) return d.sleep
+    })
+    return {
+      food,
+      rating: average,
+      sleep: average2
+    }
+  })
+
+  window.datad = new_data
+
+  x.domain(new_data.map(function(d) { return d.food; }));
+  y.domain([0, d3.max(data, function(d) { return d.rating; })]);
+
+  const color = d3.scaleOrdinal()
+      .range(["#F44336", '#9C27B0', "#8BC34A", "#FF9800"]);
+
+  const opacity = d3.scaleLinear()
+      .domain(d3.extent(new_data, (d) => d.sleep))
+      .range([0.3, 1])
+
+  window.opacity = opacity
+
+  g.append("g")
+      .attr("class", "axis axis--x")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x))
+      .append("text")
+      .attr("transform",
+                  "translate(" + (width/2) + " ,15)")
+      .attr("fill", "black")
+      .attr("y", 6)
+      .attr("dy", "0.71em")
+      .attr("text-anchor", "middle")
+      .text("Food Type");
+
+  g.append("g")
+      .attr("class", "axis axis--y")
+      .call(d3.axisLeft(y).ticks(10))
+      .append("text")
+      .attr("transform", "translate(-44, " + (height + margin.top + 20)/2 + ") rotate(270)")
+      .attr("fill", "black")
+      .attr("y", 6)
+      .attr("dy", "0.71em")
+      .attr("text-anchor", "middle")
+      .text("Sleep rating");
+
+  var t = d3.transition()
+    .duration(500)
+    .ease(d3.easeLinear)
+
+  g.selectAll(".bar")
+    .data(new_data)
+    .enter().append("rect")
+    .attr("class", "bar")
+    .attr("x", d => x(d.food) + 26)
+    .attr("y", (d) => y(d.rating))
+    .attr("width", 20)
+    .transition(t)
+    .attr("height", (d) => (height-y(d.rating)))
+    .attr("fill", (d) => color(d.food))
+    .style("opacity", (d) => opacity(d.sleep));
+});
+
+</script>

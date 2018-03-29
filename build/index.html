@@ -1,11 +1,95 @@
-<!doctype html>
-<html>
-  <head>
-    
-  </head>
-  <body>
-    <h1>My d3 project</h1>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 
-    <script src="bundle.js"></script>
-  </body>
-</html>w
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Sleep Visual</title> 
+    <meta name="description" content="fullPage continuous scrolling demo." />
+    <meta name="keywords"  content="fullpage,jquery,demo,scroll,loop,continuous" />
+    <meta name="Resource-type" content="Document" />
+
+
+    <link rel="stylesheet" type="text/css" href="./css/jquery.fullPage.css" />
+    <link rel="stylesheet" type="text/css" href="./css/examples.css" />
+
+    <!--[if IE]>
+        <script type="text/javascript">
+             var console = { log: function() {} };
+        </script>
+    <![endif]-->
+
+    <script src="./javascript/jquery.min.js"></script>
+    <script src="./javascript/jquery-ui.min.js"></script>
+
+    <script type="text/javascript" src="./javascript/scrolloverflow.js"></script>
+
+    <script type="text/javascript" src="./javascript/jquery.fullPage.js"></script>
+    <script type="text/javascript" src="./javascript/examples.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#fullpage').fullpage({
+              sectionsColor: ['#303f9f', '#ffc107', '#e64a19', 'whitesmoke', '#ccddff'],
+              anchors: ['firstPage', 'secondPage', '3rdPage', '4thpage', 'lastPage'],
+              menu: '#menu',
+              continuousVertical: false
+            });
+        });
+    </script>
+
+</head>
+<style>
+.half {
+  width: 50%;
+  margin: 0px auto;
+}
+
+#section0 h1, #section0 p{
+  color: #c5cae9 !important;
+}
+#section1 h1, #section1 p{
+  color: #ffecb3 !important;
+}
+#section2 h1, #section2 p{
+  color: #ffccbc !important;
+}
+
+.link {
+    color: rgba(0,0,0,0.5);
+    border-bottom: 1px dashed rgb(230, 74, 25);
+    transition: 0.2s all ease-in;
+}
+
+.link:hover {
+    color: rgba(230, 74, 25, 0.9);
+}
+
+</style>
+<body>
+
+<div id="fullpage">
+    <div class="section " id="section0">
+        <h1>Sleep Visualisation</h1>
+        <p class="half">Visualising the sleep cycle and food of college students to analyse the correlation between their sleep and food pattern</p>
+    </div>
+    <div class="section" id="section1">
+        <div class="intro">
+            <h1>How we collected the dataset</h1>
+            <p class="half">We collected data of four students of diverse backgrounds from VIT university. The data we got from them included their last eaten food, how much hours they slept, how good they felt the next morning.</p>
+        </div>
+    </div>
+    <div class="section" id="section2">
+        <div class="intro">
+            <h1>The preprocessing</h1>
+            <p>Since all the data was entered by the users, they weren't proper in natue and had lot of unnecessary details. We had to clean the data by changing the slept time to the right hour time, having the right format for names, dates and food category.</p>
+        </div>
+    </div>
+    <div class="section" id="section3">
+        <div class="intro">
+            <h1>Visualisation and Analysis</h1>
+            <p>With all the preprocessed data, we set on our paths to create the perfect visualisation for that. Visualisation is a great tool to create awareness of the bad sleep cycle of students. So keeping that in mind we made beautiful <a href="./foodvssleep.html" class="link">visualisations</a>.</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
